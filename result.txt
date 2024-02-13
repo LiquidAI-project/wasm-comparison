@@ -1,9 +1,0 @@
-Average time for fib_c: 157.8 ms
-Average time for wasmtime fib_c.wasm: 381 ms
-Average time for wasmer fib_c.wasm: 382.4 ms
-Average time for fib_go: 79.2 ms
-Average time for wasmtime fib_go.wasm: 97.4 ms
-Average time for wasmer fib_go.wasm: 125.4 ms
-Average time for fib_rust: 212.2 ms
-Average time for wasmtime fib_rust.wasm: 333.8 ms
-Average time for wasmer fib_rust.wasm: 392 ms
