@@ -1,9 +1,7 @@
-use std::time::{SystemTime, UNIX_EPOCH};
+use std::time::SystemTime;
 
 fn main() {
-    let mut t = SystemTime::now();
-    for _ in 0..100 {
-        t = SystemTime::now();
+    for _ in 0..1000 {
+        SystemTime::now(); 
     }
-    println!("time: {}", t.duration_since(UNIX_EPOCH).unwrap().as_nanos());
 }

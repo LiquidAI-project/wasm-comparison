@@ -1,7 +1,4 @@
 fn main() {
-    let mut a = 0;
-    for _ in 0..100000000 {
-        a += 3;
+    for _ in 0..1000 {
     }
-    println!("{}", a);
 }

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-runs=1
+runs=100
 
 output_file=$(date +"%Y-%m-%d-%H-%M.txt")
 

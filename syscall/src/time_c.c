@@ -1,10 +1,10 @@
-#include <time.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <time.h>
 
 int main() {
-    time_t t = time(NULL);
-    for (int i = 0; i < 100; i++) {
-        time_t t = time(NULL);
+    for (int i = 0; i < 1000; i++) {
+        time(NULL);
     }
-    printf("time: %ld\n", t);
+    return 0;
 }

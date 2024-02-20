@@ -1,14 +1,10 @@
 package main
 
-import (
-	"fmt"
-	"time"
-)
+import "time"
 
+// include time package
 func main() {
-	t := time.Now()
-	for i := 0; i < 100; i++ {
-		t = time.Now()
+	for i := 0; i < 1000; i++ {
+		time.Now()
 	}
-	fmt.Printf("time: %d\n", t.UnixNano())
 }
