@@ -8,13 +8,12 @@ benchmark() {
    local runtime=$2
    local filename=$3
 
-
    if [ "$runtime" == "bin" ]; then
      command="./$dir/bin/$filename"
    elif [ "$runtime" == "wasmtime" ]; then
-     command="/home/mj/.wasmtime/bin/wasmtime $dir/wasm/$filename.wasm"
+     command="$(which wasmtime) $dir/wasm/$filename.wasm"
    elif [ "$runtime" == "wasmer" ]; then
-     command="/home/mj/.wasmer/bin/wasmer $dir/wasm/$filename.wasm"
+     command="$(which wasmer) $dir/wasm/$filename.wasm"
    fi
 
    echo "Benchmarking $runtime $filename:" | tee -a $output_file
