@@ -1,7 +1,8 @@
+use std::time::Instant;
 fn main() {
-    let mut a = 0;
-    for _ in 0..1000 {
-        a += 3;
-        println!("{}", a);
+    let start = Instant::now(); 
+    for i in 0..10000 {
+        println!("{:?}", i);
     }
+    println!("{:?}", start.elapsed().as_nanos());
 }

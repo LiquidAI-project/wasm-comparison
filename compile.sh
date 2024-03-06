@@ -8,16 +8,16 @@ for dir in */; do
     for filename in "$dir"/src/*.c; do
         base_filename=$(basename "$filename" .c)
         CC "$filename" -O0 -o "$dir"/wasm/"$base_filename".wasm
-        aarch64-linux-gnu-gcc "$filename" -O0 -o "$dir"/bin/"$base_filename" 
+        clang -target aarch64-linux-gnu -march=armv8-a "$filename" -O0 -o "$dir"/bin/"$base_filename"
     done
     for filename in "$dir"/src/*.rs; do
         base_filename=$(basename "$filename" .rs)
-        rustc "$filename" -o "$dir"/wasm/"$base_filename".wasm --target=wasm32-wasi -C opt-level=0
-        rustc "$filename" -o "$dir"/bin/"$base_filename" --target=aarch64-unknown-linux-gnu -C linker=aarch64-linux-gnu-gcc -C opt-level=0
+        rustc "$filename" -o "$dir"/wasm/"$base_filename".wasm --target=wasm32-wasi -C opt-level=0 -C debuginfo=0 -C debug-assertions=off
+        rustc "$filename" -o "$dir"/bin/"$base_filename" --target=aarch64-unknown-linux-gnu -C linker=clang -C link-arg=-target -C link-arg=aarch64-linux-gnu -C opt-level=0 -C debuginfo=0 -C debug-assertions=off
     done
     for filename in "$dir"/src/*.go; do
         base_filename=$(basename "$filename" .go)
-        tinygo build -opt=0 -o "$dir"/wasm/"$base_filename".wasm -target wasi "$filename" 
-        GOARCH=arm64 GOOS=linux go build -gcflags "-N -l" -o "$dir"/bin/"$base_filename" "$filename"
+        tinygo build -opt=0 -scheduler=none -o "$dir"/wasm/"$base_filename".wasm -target wasi "$filename"
+        GOARCH=arm64 GOOS=linux tinygo build -opt=0 -scheduler=none -o "$dir"/bin/"$base_filename" "$filename"
     done
 done

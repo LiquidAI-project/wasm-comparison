@@ -1,8 +1,15 @@
 package main
 
+import (
+	"time"
+)
+
 func main() {
-	data := make([]int, 1024*1024)
-	data[0] = 5
-	data[1024] = 10
-	data[1024*1023] = 15
+	start := time.Now()
+	data := make([]int, 0)
+	for i := 0; i < 10000; i++ {
+		data = append(data, i)
+	}
+	duration := time.Since(start)
+	println(duration.Nanoseconds())
 }

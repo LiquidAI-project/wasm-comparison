@@ -1,15 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 int main() {
-    int *data = malloc(1024 * 1024); 
-    if (data == NULL) {
-        fprintf(stderr, "Memory allocation failed!\n");
-        return 1;
+    struct timespec start, end;
+    unsigned long timeElapsed;
+    int *data = NULL;
+    int i;
+    clock_gettime(CLOCK_MONOTONIC, &start);
+    for(i = 0; i < 10000; i++) {
+        data = realloc(data, (i + 1) * sizeof(int)); 
+        data[i] = i;            
     }
-    data[0] = 5;            
-    data[1024] = 10;  
-    data[1024 * 1023] = 15;
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    timeElapsed = (end.tv_sec - start.tv_sec) * 1e9;
+    timeElapsed = (end.tv_nsec - start.tv_nsec) + timeElapsed;
+    printf("%lu\n", timeElapsed);
     free(data);
     return 0;
 }

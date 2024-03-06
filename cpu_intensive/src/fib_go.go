@@ -1,5 +1,9 @@
 package main
 
+import (
+	"time"
+)
+
 func fibonacci(n int) int {
 	if n <= 1 {
 		return n
@@ -8,5 +12,8 @@ func fibonacci(n int) int {
 }
 
 func main() {
+	start := time.Now()
 	fibonacci(37)
+	duration := time.Since(start)
+	println(duration.Nanoseconds())
 }

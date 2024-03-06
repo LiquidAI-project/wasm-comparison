@@ -1,7 +1,9 @@
-use std::time::SystemTime;
+use std::time::{Instant, SystemTime};
 
 fn main() {
-    for _ in 0..1000 {
-        SystemTime::now(); 
+    let start =Instant::now();
+    for _ in 0..10000 {
+        SystemTime::now();
     }
+    println!("{:?}", start.elapsed().as_nanos());
 }

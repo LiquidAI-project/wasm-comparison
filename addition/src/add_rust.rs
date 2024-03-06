@@ -1,4 +1,8 @@
+use std::time::Instant;
+
 fn main() {
-    for _ in 0..1000 {
+    let start = Instant::now();
+    for _ in 0..10000 {
     }
+    println!("{:?}", start.elapsed().as_nanos());
 }

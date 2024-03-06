@@ -1,8 +1,13 @@
 #include <stdio.h>
+#include <time.h>
 int main() {
-    int a = 0;
-    for (int i = 0; i < 1000; i++) {
-        a += 3;
-        printf("%d\n", a);
+    struct timespec start, end;
+    unsigned long timeElapsed;
+    clock_gettime(CLOCK_MONOTONIC, &start); 
+    for (int i = 0; i < 10000; i++) {
+        printf("%d\n", i);
     }
+    clock_gettime(CLOCK_MONOTONIC, &end); 
+    timeElapsed = (end.tv_sec - start.tv_sec) * 1e9+ (end.tv_nsec - start.tv_nsec);
+    printf("%lu\n", timeElapsed);
 }

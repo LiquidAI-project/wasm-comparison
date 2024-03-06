@@ -1,6 +1,10 @@
+use std::time::Instant;
+
 fn main() {
-    let mut data = Vec::with_capacity(1024 * 1024);
-    data[0] = 5;
-    data[1024] = 10;
-    data[1024 * 1023] = 15;
+    let start = Instant::now();
+    let mut data = Vec::new();
+    for i in 0..10000 {
+        data.push(i);
+    }
+    println!("{:?}", start.elapsed().as_nanos());
 }

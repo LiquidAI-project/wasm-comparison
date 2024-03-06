@@ -1,13 +1,14 @@
 package main
 
 import (
-	"fmt"
+	"time"
 )
 
 func main() {
-	a := 0
-	for i := 0; i < 1000; i++ {
-		a += 3
-		fmt.Println(a)
+	start := time.Now()
+	for i := 0; i < 10000; i++ {
+		println(i)
 	}
+	duration := time.Since(start)
+	println(duration.Nanoseconds())
 }
