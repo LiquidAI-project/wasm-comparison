@@ -18,22 +18,18 @@ The project is organized into multiple directories, each representing a separate
 
 This Bash script automates the compilation process fo source files into both WebAssembly modules and native binaries.
 
-- **C files:** Uses `clang` from the WASI SDK for WebAssembly compilation and `aarch64-linux-gnu-gcc` for native aarch64 binaries.
-- **Rust files:** Utilizes `rustc` for both WebAssembly (with the `wasm32-wasi` target) and native (with the `aarch64-unknown-linux-gnu` target) compilation.
-- **Go files:** Employs `tinygo` for WebAssembly compilation targeting the `wasi` environment and the standard Go compiler for native aarch64 binaries with appropriate environment variables.
+- **C files:** Uses `clang` for native arm64 compilation and `clang` with the `wasi-sdk` for WebAssembly compilation.
+- **Rust files:** Utilizes `rustc` for both WebAssembly (with the `wasm32-wasi` target) and native arm64 (with `clang` as the linker) compilation.
+- **Go files:** Employs `tinygo` both for WebAssembly (with the `wasi` target) and native arm64 compilation.
 
 ### Benchmarking Script (`run`)
 
-This Bash script facilitates the benchmarking of compiled binaries and WebAssembly modules using `perf stat`. It supports benchmarking in native execution and within WebAssembly runtimes such as `wasmtime` and `wasmer`.
-
-- Benchmarks are executed for each compiled binary and WebAssembly module.
-- Performance metrics cycles, instructions, task-clock, and duration_time are captured.
-- Results are appended to a timestamped output file.
+This Bash script facilitates the benchmarking of compiled binaries and WebAssembly modules for each module in the project. It runs each compiled output multiple times and records the execution time for each run. The script generates a timestamped output file containing the benchmark results that can be used for further analysis.
 
 ## Usage
 0. **Setup:** Ensure all dependencies are correctly installed and accessible in your environment and you are in a aarch64 environment.
 1. **Compiling the Code:** Execute the `compile` script from the root of the project directory to compile all source files into WebAssembly modules and native binaries.
-2. **Running Benchmarks:** Execute the `run` script to benchmark the compiled outputs. The script will generate a detailed performance report in a timestamped text file.
+2. **Running Benchmarks:** Execute the `run` script to benchmark the compiled outputs.
 
 ## Requirements
 
@@ -41,7 +37,7 @@ This Bash script facilitates the benchmarking of compiled binaries and WebAssemb
 - [Rust](https://www.rust-lang.org/tools/install) compiler (`rustc`) with `wasm32-wasi` and `aarch64-unknown-linux-gnu` targets configured.
 - Go compiler (`go`) and [TinyGo](https://tinygo.org/) for Go source compilation.
 - `aarch64-linux-gnu-gcc` for compiling native aarch64 binaries. (cross-compilation)
-- `perf` tool for capturing performance metrics.
+- `nice` tool for setting process priority.
 - [wasmtime](https://wasmtime.dev/) and [wasmer](https://wasmer.io/) for running WebAssembly modules.
 
 Ensure all dependencies are correctly installed and accessible in your environment before running the scripts.
