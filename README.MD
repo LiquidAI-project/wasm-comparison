@@ -42,7 +42,7 @@ This Bash script facilitates the benchmarking of compiled binaries and WebAssemb
 
 Ensure all dependencies are correctly installed and accessible in your environment before running the scripts.
 ## Results
-A sample benchmark and related analysis is available in the (results)[./results] directory.
+A sample benchmark and related analysis is available in the [results](./results) directory.
 
 ## License
 
