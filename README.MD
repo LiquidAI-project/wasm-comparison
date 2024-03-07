@@ -1,4 +1,4 @@
-# Project Name
+# WASM-WASI-ARM64-Benchmarking
 
 ## Overview
 
@@ -41,6 +41,8 @@ This Bash script facilitates the benchmarking of compiled binaries and WebAssemb
 - [wasmtime](https://wasmtime.dev/) and [wasmer](https://wasmer.io/) for running WebAssembly modules.
 
 Ensure all dependencies are correctly installed and accessible in your environment before running the scripts.
+## Results
+A sample benchmark and related analysis is available in the (results)[./results] directory.
 
 ## License
 
