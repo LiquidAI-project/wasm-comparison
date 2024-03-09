@@ -6,7 +6,7 @@ import (
 
 func main() {
 	start := time.Now()
-	for i := 0; i < 10000; i++ {
+	for i := 0; i < 50000; i++ {
 		println(i)
 	}
 	duration := time.Since(start)

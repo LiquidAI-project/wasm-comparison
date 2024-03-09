@@ -4,7 +4,7 @@ int main() {
     struct timespec start, end;
     unsigned long timeElapsed;
     clock_gettime(CLOCK_MONOTONIC, &start); 
-    for (int i = 0; i < 10000; i++) {
+    for (int i = 0; i < 50000; i++) {
         printf("%d\n", i);
     }
     clock_gettime(CLOCK_MONOTONIC, &end); 

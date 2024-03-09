@@ -17,7 +17,7 @@ for dir in */; do
     done
     for filename in "$dir"/src/*.go; do
         base_filename=$(basename "$filename" .go)
-        tinygo build -opt=0 -scheduler=none -o "$dir"/wasm/"$base_filename".wasm -target wasi "$filename"
-        GOARCH=arm64 GOOS=linux tinygo build -opt=0 -scheduler=none -o "$dir"/bin/"$base_filename" "$filename"
+        tinygo build -opt=0 -scheduler=none -gc=leaking -o "$dir"/wasm/"$base_filename".wasm -target wasi "$filename"
+        GOARCH=arm64 GOOS=linux tinygo build -opt=0 -scheduler=none -gc=leaking -o "$dir"/bin/"$base_filename" "$filename"
     done
 done

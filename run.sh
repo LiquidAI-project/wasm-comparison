@@ -1,6 +1,6 @@
 #!/bin/bash
 
-runs=100
+runs=500
 output_file=$(date +"%Y-%m-%d-%H-%M.txt")
 
 benchmark() {
@@ -11,18 +11,21 @@ benchmark() {
    if [ "$runtime" == "bin" ]; then
      command="./$dir/bin/$filename"
    elif [ "$runtime" == "wasmtime" ]; then
-     command="wasmtime $dir/wasm/$filename.wasm"
+     command="/home/mj/.wasmtime/bin/wasmtime $dir/wasm/$filename.wasm"
    elif [ "$runtime" == "wasmer" ]; then
-     command="wasmer $dir/wasm/$filename.wasm"
+     command="/home/mj/.wasmer/bin/wasmer $dir/wasm/$filename.wasm"
    fi  
 
    echo "Benchmarking $runtime $filename:" | tee -a $output_file
 
-   for i in $(seq 1 $runs); do
-     output=$(nice -n -20 $command)
-     last_line=$(echo "$output" | tail -n1)
-     echo "$runtime $filename run $i: $last_line" | tee -a $output_file
-   done
+  for i in $(seq 1 $runs); do
+    sync
+    temp_file=$(mktemp)
+    nice -n -20 $command > $temp_file
+    last_line=$(tail -n1 $temp_file)
+    echo "$runtime $filename run $i: $last_line" | tee -a $output_file
+    rm $temp_file
+  done
 }
 
 for dir in */; do
